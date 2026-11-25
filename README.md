@@ -1,26 +1,19 @@
-<div align="center">
+# Argus
 
-# Argus 👁️
-
-**The 100-Eyed Runtime Sentinel: Zero-Overhead, Local-First API & Agent Security**
+**In-process runtime security and living contract sentinel for microservices and AI agent tool calls.**
 
 [![Java 21](https://img.shields.io/badge/Java-21%20LTS-orange.svg?style=flat-square&logo=openjdk)](https://openjdk.org/)
 [![Spring Boot 3](https://img.shields.io/badge/Spring%20Boot-3.2+-brightgreen.svg?style=flat-square&logo=springboot)](https://spring.io/)
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg?style=flat-square&logo=python)](https://python.org/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
-
-*Zero AI-Slop. Built on deep modules, lock-free ring buffers, and in-process bytecode manipulation.*
-
-</div>
 
 ---
 
-## What is Argus?
+## Overview
 
 Argus is an in-process, sub-millisecond security and contract sentinel for distributed microservices and autonomous AI agent tool calls.
 
-Unlike external network proxies or eBPF sniffers, Argus attaches directly inside the application runtime (`-javaagent` / ASGI middleware). It inspects HTTP transactions **after** TLS termination, resolving true framework **Route Templates** (e.g. `/orders/{id}`) with zero false positives, detecting live **Secret and PII leaks**, and preventing unauthorized agent actions without adding perceptible latency.
+Unlike external network proxies or eBPF sniffers, Argus attaches directly inside the application runtime (`-javaagent` / ASGI middleware). It inspects HTTP transactions **after** TLS termination, resolving true framework **Route Templates** (e.g. `/orders/{id}`) with zero false positives, detecting live **Secret and PII leaks**, and tracking schema drift without adding perceptible latency.
 
 ```mermaid
 flowchart LR
@@ -56,9 +49,9 @@ flowchart LR
 
 ---
 
-## Quickstart (Under 60 Seconds)
+## Quickstart
 
-### 1. Clone & Build
+### 1. Build from Source
 ```bash
 git clone https://github.com/HimanshuJha-2005/argus.git
 cd argus
@@ -71,13 +64,16 @@ java -javaagent:argus-agent/target/argus-agent-0.1.0-SNAPSHOT.jar \
      -jar argus-sample/target/argus-sample-0.1.0-SNAPSHOT.jar
 ```
 
-You will see:
+Standard boot output confirms the sensor attachment:
 ```text
 [Argus] Runtime sensor initialized with capacity 16384
 Tomcat started on port 8080 (http)
 ```
 
-### 3. Test Endpoints
+### 3. Exercise Endpoints
+
+> **Note for Windows PowerShell**: Run `curl.exe` instead of `curl` (which aliases to `Invoke-WebRequest`).
+
 ```bash
 # 1. Parameterized Route Template Resolution
 curl http://localhost:8080/api/v1/orders/ord_998124
@@ -93,12 +89,12 @@ curl -X POST http://localhost:8080/api/v1/users/usr_456 \
 
 ---
 
-## Repository Map
+## Repository Structure
 
 ```text
 argus/
 ├── GLOSSARY.md                # Ubiquitous domain language (Canonical reference)
-├── AGENTS.md                  # Strict alignment rules for AI coding assistants
+├── AGENTS.md                  # Alignment rules for AI coding assistants
 ├── MASTERPLAN.md              # 12-Month roadmap, funding ladder, and startup model
 ├── docs/
 │   ├── adr/
@@ -121,5 +117,5 @@ argus/
 
 ---
 
-## AI Agent Notice
-If you are an AI coding assistant (Cursor, Claude Code, Copilot, etc.) contributing to this repository, you **must** strictly adhere to [AGENTS.md](./AGENTS.md) and [GLOSSARY.md](./GLOSSARY.md). No pass-through boilerplate, no fake layers.
+## Contributing & Agent Guidelines
+All contributors and AI coding assistants must strictly adhere to [AGENTS.md](./AGENTS.md) and [GLOSSARY.md](./GLOSSARY.md). No pass-through boilerplate, no fake abstraction layers. Deep modules only.
