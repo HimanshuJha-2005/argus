@@ -82,38 +82,47 @@ final class DefaultPayloadInspector implements PayloadInspector {
     private static String inferJsonSchema(String jsonText) {
         try {
             JsonNode root = OBJECT_MAPPER.readTree(jsonText);
-            return describeNode(root);
+            JsonNode openApiSchema = toOpenApiSchema(root);
+            return OBJECT_MAPPER.writeValueAsString(openApiSchema);
         } catch (Exception e) {
-            return "{\"type\":\"raw\"}";
+            return "{\"type\":\"string\"}";
         }
     }
 
-    private static String describeNode(JsonNode node) {
+    private static JsonNode toOpenApiSchema(JsonNode node) {
         if (node.isObject()) {
-            StringBuilder sb = new StringBuilder("{");
-            Iterator<Map.Entry<String, JsonNode>> fields = node.fields();
-            boolean first = true;
-            while (fields.hasNext()) {
-                if (!first) sb.append(",");
-                first = false;
-                Map.Entry<String, JsonNode> field = fields.next();
-                sb.append("\"").append(field.getKey()).append("\":").append(describeNode(field.getValue()));
-            }
-            sb.append("}");
-            return sb.toString();
+            var objNode = OBJECT_MAPPER.createObjectNode();
+            objNode.put("type", "object");
+            var properties = objNode.putObject("properties");
+            node.fields().forEachRemaining(entry ->
+                    properties.set(entry.getKey(), toOpenApiSchema(entry.getValue()))
+            );
+            return objNode;
         } else if (node.isArray()) {
-            if (node.isEmpty()) {
-                return "[\"unknown\"]";
+            var arrNode = OBJECT_MAPPER.createObjectNode();
+            arrNode.put("type", "array");
+            if (!node.isEmpty()) {
+                arrNode.set("items", toOpenApiSchema(node.get(0)));
+            } else {
+                arrNode.putObject("items").put("type", "string");
             }
-            return "[" + describeNode(node.get(0)) + "]";
+            return arrNode;
         } else if (node.isNumber()) {
-            return "\"number\"";
+            var numNode = OBJECT_MAPPER.createObjectNode();
+            numNode.put("type", node.isIntegralNumber() ? "integer" : "number");
+            return numNode;
         } else if (node.isBoolean()) {
-            return "\"boolean\"";
+            var boolNode = OBJECT_MAPPER.createObjectNode();
+            boolNode.put("type", "boolean");
+            return boolNode;
         } else if (node.isNull()) {
-            return "\"null\"";
+            var nullNode = OBJECT_MAPPER.createObjectNode();
+            nullNode.put("type", "null");
+            return nullNode;
         } else {
-            return "\"string\"";
+            var strNode = OBJECT_MAPPER.createObjectNode();
+            strNode.put("type", "string");
+            return strNode;
         }
     }
 
