@@ -112,41 +112,31 @@ graph TD
 
 ## 6. 12-Month Execution Roadmap
 
-````carousel
-```markdown
 ### Quarter 1 (Months 1–3): The Core Engine Alpha
-- [ ] Build `argus-java-agent` core: intercept Spring Boot requests, extract route templates and headers.
-- [ ] Build `argus-python` ASGI middleware for FastAPI.
-- [ ] Implement asynchronous ring-buffer collector and basic PII/secret regex scanner.
-- [ ] Pitch at Parul University PIEDC / Vadodara Startup Fest; apply for Gujarat SSIP 2.0 grant.
-- [ ] Target: Single `docker-compose.yml` demo running in under 2 minutes.
-```
-<!-- slide -->
-```markdown
+* Build `argus-java-agent` core: intercept Spring Boot requests, extract route templates and headers.
+* Build `argus-python` ASGI middleware for FastAPI.
+* Implement asynchronous ring-buffer collector and basic PII/secret regex scanner.
+* Pitch at Parul University PIEDC / Vadodara Startup Fest; apply for Gujarat SSIP 2.0 grant.
+* Target: Single `docker-compose.yml` demo running in under 2 minutes.
+
 ### Quarter 2 (Months 4–6): Open-Source Public Launch
-- [ ] Package as an Apache-2.0 open-source project with world-class documentation.
-- [ ] Ship local dashboard: Interactive API topology map + one-click `openapi.json` export.
-- [ ] Launch on Show HN, Reddit (`/r/java`, `/r/Python`, `/r/devops`), and Product Hunt.
-- [ ] Secure Google for Startups Cloud credits ($25k-$100k tier).
-- [ ] Target: 500+ GitHub Stars, 20 active development teams testing in local environments.
-```
-<!-- slide -->
-```markdown
+* Package as an Apache-2.0 open-source project with world-class documentation.
+* Ship local dashboard: Interactive API topology map + one-click `openapi.json` export.
+* Launch on Show HN, Reddit (`/r/java`, `/r/Python`, `/r/devops`), and Product Hunt.
+* Secure Google for Startups Cloud credits ($25k-$100k tier).
+* Target: 500+ GitHub Stars, 20 active development teams testing in local environments.
+
 ### Quarter 3 (Months 7–9): CI/CD Gating & Early Enterprise Pilots
-- [ ] Add CI/CD GitHub Action: Fail pull requests if an endpoint leaks PII or breaks API schemas.
-- [ ] Implement BOLA/IDOR heuristic detection rules based on runtime auth contexts.
-- [ ] Koustav conducts structured cold outreach to 100 tech leads at fast-growing Indian and global SaaS startups.
-- [ ] Close 3-5 friendly design partner startups using the tool in their staging/test environments.
-```
-<!-- slide -->
-```markdown
+* Add CI/CD GitHub Action: Fail pull requests if an endpoint leaks PII or breaks API schemas.
+* Implement BOLA/IDOR heuristic detection rules based on runtime auth contexts.
+* Koustav conducts structured cold outreach to 100 tech leads at fast-growing Indian and global SaaS startups.
+* Close 3-5 friendly design partner startups using the tool in their staging/test environments.
+
 ### Quarter 4 (Months 10–12): YC Application & Commercialization
-- [ ] Launch Hosted Team Dashboard (Open-Core commercial tier for team collaboration & compliance logs).
-- [ ] Record 2-minute demo video showing 5-minute setup and immediate high-severity secret catch.
-- [ ] Secure 2 paid pilot contracts or letters of intent (LOIs).
-- [ ] Submit Y Combinator application with clear weekly active user (WAU) growth and technical moat.
-```
-````
+* Launch Hosted Team Dashboard (Open-Core commercial tier for team collaboration & compliance logs).
+* Record 2-minute demo video showing 5-minute setup and immediate high-severity secret catch.
+* Secure 2 paid pilot contracts or letters of intent (LOIs).
+* Submit Y Combinator application with clear weekly active user (WAU) growth and technical moat.
 
 ---
 
