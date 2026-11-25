@@ -71,5 +71,11 @@ class PayloadInspectorTest {
 
         assertThat(report.hasLeaks()).isFalse();
         assertThat(report.findings()).isEmpty();
+        assertThat(report.inferredSchema())
+                .contains("\"type\":\"object\"")
+                .contains("\"properties\":")
+                .contains("\"username\":{\"type\":\"string\"}")
+                .contains("\"userId\":{\"type\":\"string\"}")
+                .contains("\"role\":{\"type\":\"string\"}");
     }
 }
