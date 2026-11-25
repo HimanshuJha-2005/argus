@@ -166,8 +166,10 @@ class ArgusAgentIntegrationTest {
 
         assertThat(requestReport.hasLeaks()).isFalse();
         assertThat(requestReport.inferredSchema())
-                .contains("\"name\":\"string\"")
-                .contains("\"email\":\"string\"");
+                .contains("\"type\":\"object\"")
+                .contains("\"properties\":")
+                .contains("\"name\":{\"type\":\"string\"}")
+                .contains("\"email\":{\"type\":\"string\"}");
     }
 
     private static List<CapturedTransaction> drainCapturedTransactions() {
